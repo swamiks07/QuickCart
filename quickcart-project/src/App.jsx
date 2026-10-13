@@ -3,6 +3,7 @@ import { HomePage } from './Pages/Homepage'
 import { CheckoutPage } from './Pages/Checkout/CheckoutPage'
 import { OrdersPage } from './Pages/OrdersPage'
 import { TrackingPage } from './Pages/TrackingPage'
+import { PageNotFound } from './Pages/PageNotFound'
 import './App.css'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route path='checkout' element={<CheckoutPage />} />
       <Route path='orders' element={<OrdersPage />} />
       <Route path='tracking' element={<TrackingPage />} />
+      <Route path='*' element={<PageNotFound />} />
     </Routes>
     
   )
