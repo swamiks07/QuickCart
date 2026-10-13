@@ -2,7 +2,7 @@
   height: 60px;
   padding-left: 30px;
   padding-right: 30px;
-  background-color: white;
+  background-color: rgb(154, 233, 247);
 
   display: flex;
   justify-content: center;
@@ -28,9 +28,10 @@
 
 .checkout-header .logo {
   width: 180px;
-  background-color: aqua;
+  background-color: rgb(154, 233, 247);
   color: rgb(27, 220, 27);
   padding: 5px;
+  padding-bottom: 0px;
   margin-top: 0px;
 }
 
