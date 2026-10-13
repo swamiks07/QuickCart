@@ -5,6 +5,9 @@ export function HomePage(){
     return(
         <>
         <title>Quickcart Project</title>
+       
+        <link rel="icon" type="image/x-icon" href="/home-favicon.png" />
+    
         <Header />
 
         <div className="home-page">
