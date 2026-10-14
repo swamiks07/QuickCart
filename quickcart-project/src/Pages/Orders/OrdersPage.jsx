@@ -1,8 +1,7 @@
-import { Link } from "react-router";
 import axios from "axios";
 import { useState, useEffect, Fragment } from "react";
-import { Header } from "../components/Header";
-import BuyAgainIcon from "../assets/images/icons/buy-again.png";
+import { Header } from "../../components/Header";
+import BuyAgainIcon from "../../assets/images/icons/buy-again.png";
 import "./OrdersPage.css";
 import dayjs from "dayjs";
 
