@@ -4,7 +4,13 @@ import Logo from '../../assets/images/quickcart-logo.png';
 import MobileLogoWhite from '../../assets/images/mobile-logo-white.png';
 import './CheckoutHeader.css'
 
-export function CheckoutHeader() {
+export function CheckoutHeader({ cart }) {
+  let totalQuatity = 0;
+
+  cart.forEach((cartItem) => {
+    totalQuatity += cartItem.quantity;
+  });
+
   return (
     <>
       <div className="checkout-header">
@@ -19,7 +25,7 @@ export function CheckoutHeader() {
           <div className="checkout-header-middle-section">
             Checkout (
             <Link className="return-to-home-link" to="/">
-              3 items
+              {totalQuatity} items
             </Link>
             )
           </div>
