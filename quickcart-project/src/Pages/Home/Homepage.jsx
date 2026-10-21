@@ -21,7 +21,7 @@ export function HomePage({cart}) {
     <>
       <title>Quickcart Project</title>
 
-      <link rel="icon" type="image/x-icon" href="/home-favicon.png" />
+      <link rel="icon" type="image/x-icon" href="../../assets/images/home-favicon" />
 
       <Header cart={cart} />
 
