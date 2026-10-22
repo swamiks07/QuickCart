@@ -4,6 +4,8 @@ import { Header } from "../../components/Header";
 import "./OrdersPage.css";
 import { OrderHeader } from "./OrderHeader";
 import { OrderDetailsGrid } from "./OrderDetailsGrid";
+import OrdersIcon from "../../assets/images/orders-favicon.png";
+
 
 export function OrdersPage({ cart, loadCart }) {
   const [orders, setOrders] = useState([]);
@@ -17,12 +19,22 @@ export function OrdersPage({ cart, loadCart }) {
     fetchOrdersData();
   }, []);
 
+  useEffect(() => {
+      document.title = "Orders - QuickCart";
+  
+      let favicon = document.querySelector("link[rel='icon']");
+  
+      if (!favicon) {
+        favicon = document.createElement("link");
+        favicon.rel = "icon";
+        document.head.appendChild(favicon);
+      }
+  
+      favicon.href = OrdersIcon;
+    }, []);
+
   return (
     <>
-      <title>Orders</title>
-
-      <link rel="icon" type="image/svg+xml" href="orders-favicon.png" />
-
       <Header cart={cart} />
 
       <div className="orders-page">

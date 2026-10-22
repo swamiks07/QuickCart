@@ -5,8 +5,23 @@ import { useState, useEffect } from "react";
 
 import { Header } from "../../components/Header";
 import "./TrackingPage.css";
+import TrackingIcon from "../../assets/images/location-favicon.png";
 
 export function TrackingPage({ cart }) {
+  useEffect(() => {
+    document.title = "Tracking - QuickCart";
+
+    let favicon = document.querySelector("link[rel='icon']");
+
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      document.head.appendChild(favicon);
+    }
+
+    favicon.href = TrackingIcon;
+  }, []);
+  
   const { orderId, productId } = useParams();
   const [order, setOrder] = useState(null);
 
@@ -42,10 +57,10 @@ export function TrackingPage({ cart }) {
   const isShipped = deliveryPercent >= 33 && deliveryPercent < 100;
   const isDelivered = deliveryPercent === 100;
 
+  
+
   return (
     <>
-      <title>Tracking</title>
-
       <Header cart={cart} />
 
       <div className="tracking-page">
@@ -55,7 +70,7 @@ export function TrackingPage({ cart }) {
           </a>
 
           <div className="delivery-date">
-            {deliveryPercent >= 100 ? "Delivered on" : "Arriving on"}
+            {deliveryPercent >= 100 ? "Delivered on " : "Arriving on "}
             {dayjs(orderProduct.estimatedDeliveryTimeMs).format("dddd, MMMM D")}
           </div>
 
@@ -63,7 +78,10 @@ export function TrackingPage({ cart }) {
 
           <div className="product-info">Quantity: {orderProduct.quantity}</div>
 
-          <img className="product-image" src={`/${orderProduct.product.image}`} />
+          <img
+            className="product-image"
+            src={`/${orderProduct.product.image}`}
+          />
 
           <div className="progress-labels-container">
             <div
@@ -91,7 +109,6 @@ export function TrackingPage({ cart }) {
               style={{ width: `${deliveryPercent}%` }}
             ></div>
           </div>
-
         </div>
       </div>
     </>

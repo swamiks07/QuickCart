@@ -4,43 +4,60 @@ import { CheckoutHeader } from "./CheckoutHeader";
 import "./CheckoutPage.css";
 import { OrderSummary } from "./OrderSummary";
 import { PaymentSummary } from "./Paymentsummary";
+import CartIcon from "../../assets/images/cart-favicon.png";
+
 
 export function CheckoutPage({ cart, loadCart }) {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
 
   useEffect(() => {
-    const fetchCheckoutData = async () =>{
-      const response = await axios
-      .get(
+    const fetchCheckoutData = async () => {
+      const response = await axios.get(
         "http://localhost:3000/api/delivery-options?expand=estimatedDeliveryTime",
       );
       setDeliveryOptions(response.data);
     };
     fetchCheckoutData();
   }, []);
-  
-  useEffect(() =>{
+
+  useEffect(() => {
     const fetchPaymentSummary = async () => {
-      const response = await axios.get("http://localhost:3000/api/payment-summary");
+      const response = await axios.get(
+        "http://localhost:3000/api/payment-summary",
+      );
       setPaymentSummary(response.data);
     };
     fetchPaymentSummary();
   }, [cart]);
 
+  useEffect(() => {
+    document.title = "Checkout - QuickCart";
+
+    let favicon = document.querySelector("link[rel='icon']");
+
+    if (!favicon) {
+      favicon = document.createElement("link");
+      favicon.rel = "icon";
+      document.head.appendChild(favicon);
+    }
+
+    favicon.href = CartIcon;
+  }, []);
+
   return (
     <>
-      <title>Checkout</title>
-
-      <link rel="icon" type="image/svg+xml" href="cart-favicon.png" />
-
       <CheckoutHeader cart={cart} />
 
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
 
         <div className="checkout-grid">
-          <OrderSummary cart={cart} deliveryOptions={deliveryOptions} loadCart={loadCart} />
+          <OrderSummary
+            cart={cart}
+            deliveryOptions={deliveryOptions}
+            loadCart={loadCart}
+          />
 
           <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
         </div>
