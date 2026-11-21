@@ -2,34 +2,42 @@ import { Sequelize } from 'sequelize';
 import sqlJsAsSqlite3 from 'sql.js-as-sqlite3';
 import fs from 'fs';
 
-const isUsingRDS = process.env.RDS_HOSTNAME && process.env.RDS_USERNAME && process.env.RDS_PASSWORD;
-const dbType = process.env.DB_TYPE || 'mysql';
-const defaultPorts = {
-  mysql: 3306,
-  postgres: 5432,
-};
-const defaultPort = defaultPorts[dbType];
-
 export let sequelize;
 
-if (isUsingRDS) {
-  sequelize = new Sequelize({
-    database: process.env.RDS_DB_NAME,
-    username: process.env.RDS_USERNAME,
-    password: process.env.RDS_PASSWORD,
-    host: process.env.RDS_HOSTNAME,
-    port: process.env.RDS_PORT || defaultPort,
-    dialect: dbType,
-    logging: false
+if (process.env.DATABASE_URL) {
+  // Production: Neon PostgreSQL
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   });
+
+  console.log('Using Neon PostgreSQL database');
+
+} else if (process.env.NODE_ENV === 'production') {
+  throw new Error('DATABASE_URL is missing in production!');
+
 } else {
+  // Local development: SQLite
   sequelize = new Sequelize({
     dialect: 'sqlite',
     dialectModule: sqlJsAsSqlite3,
     logging: false
   });
 
-  // Save database to file after write operations.
+  console.log('Using local SQLite database');
+
   sequelize.addHook('afterCreate', saveDatabaseToFile);
   sequelize.addHook('afterDestroy', saveDatabaseToFile);
   sequelize.addHook('afterUpdate', saveDatabaseToFile);
