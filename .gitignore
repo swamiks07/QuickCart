@@ -1,0 +1,17 @@
+# Frontend dependencies
+quickcart-project/node_modules/
+
+# Backend dependencies
+quickcart-backend/node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build files
+quickcart-project/dist/
+quickcart-project/build/
+
+# Logs
+npm-debug.log*
