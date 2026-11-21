@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../api';
 import { Fragment } from "react";
 import dayjs from "dayjs";
 import BuyAgainIcon from "../../assets/images/icons/buy-again.png";
@@ -8,7 +9,7 @@ export function OrderDetailsGrid({ order, loadCart }) {
     <div className="order-details-grid">
       {order.products.map((orderProduct) => {
         const addToCart = async () => {
-          await axios.post('http://localhost:3000/api/cart-items', {
+          await axios.post(`${API_BASE_URL}/api/cart-items`, {
             productId: orderProduct.product.id,
             quantity: 1
           });

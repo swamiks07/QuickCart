@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../api';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Header } from "../../components/Header";
@@ -12,7 +13,7 @@ export function OrdersPage({ cart, loadCart }) {
 
   useEffect(() => {
     const fetchOrdersData = async () =>{
-      const response = await axios.get("http://localhost:3000/api/orders?expand=products");
+      const response = await axios.get(`${API_BASE_URL}/api/orders?expand=products`);
       setOrders(response.data);
     }
     

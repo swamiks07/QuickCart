@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../api';
 import dayjs from "dayjs";
 import { DeliveryOptions } from "./DeliveryOptions";
 import axios from "axios";
@@ -13,7 +14,7 @@ export function OrderSummary({cart, deliveryOptions, loadCart}) {
             },
           );
           const deleteCartItem = async ()=>{
-            await axios.delete(`http://localhost:3000/api/cart-items/${cartItem.productId}`)
+            await axios.delete(`${API_BASE_URL}/api/cart-items/${cartItem.productId}`)
             await loadCart();
           };
 

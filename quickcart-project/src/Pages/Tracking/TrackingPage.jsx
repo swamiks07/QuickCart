@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../api';
 import axios from "axios";
 import dayjs from "dayjs";
 import { useParams } from "react-router";
@@ -28,7 +29,7 @@ export function TrackingPage({ cart }) {
   useEffect(() => {
     const fetchTrackingData = async () => {
       const response = await axios.get(
-        `http://localhost:3000/api/orders/${orderId}?expand=products`,
+        `${API_BASE_URL}/api/orders/${orderId}?expand=products`,
       );
       setOrder(response.data);
     };

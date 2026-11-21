@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../api';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { CheckoutHeader } from "./CheckoutHeader";
@@ -14,7 +15,7 @@ export function CheckoutPage({ cart, loadCart }) {
   useEffect(() => {
     const fetchCheckoutData = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/delivery-options?expand=estimatedDeliveryTime",
+        `${API_BASE_URL}/api/delivery-options?expand=estimatedDeliveryTime`,
       );
       setDeliveryOptions(response.data);
     };
@@ -24,7 +25,7 @@ export function CheckoutPage({ cart, loadCart }) {
   useEffect(() => {
     const fetchPaymentSummary = async () => {
       const response = await axios.get(
-        "http://localhost:3000/api/payment-summary",
+        `${API_BASE_URL}/api/payment-summary`,
       );
       setPaymentSummary(response.data);
     };

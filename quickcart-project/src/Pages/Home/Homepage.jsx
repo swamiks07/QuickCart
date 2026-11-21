@@ -1,3 +1,4 @@
+import API_BASE_URL from '../../api';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
@@ -14,8 +15,8 @@ export function HomePage({ cart, loadCart }) {
   useEffect(() => {
     const getHomeData = async () => {
       const urlPath = search
-        ? `http://localhost:3000/api/products?search=${search}`
-        : "http://localhost:3000/api/products";
+          ? `${API_BASE_URL}/api/products?search=${encodeURIComponent(search)}`
+          : `${API_BASE_URL}/api/products`;
       const response = await axios.get(urlPath);
       setProducts(response.data);
     };

@@ -1,3 +1,4 @@
+import API_BASE_URL from './api';
 import axios from "axios";
 import { Routes, Route } from "react-router";
 import { useState, useEffect } from "react";
@@ -12,7 +13,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const loadCart = async () => {
     const response = await axios.get(
-      "http://localhost:3000/api/cart-items?expand=product",
+      `${API_BASE_URL}/api/cart-items?expand=product`,
     );
     setCart(response.data);
   };
