@@ -155,6 +155,24 @@ body{
 .checkout-page .delivery-option-input {
   margin: 3px 5px 0px 0px;
   cursor: pointer;
+  
+}
+.checkout-page .delivery-option-input {
+  margin: 3px 5px 0px 0px;
+  cursor: pointer;
+  accent-color: rgb(25, 135, 84);
+}
+
+/* Remove mouse-click focus ring */
+.checkout-page .delivery-option-input:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Keep focus indicator for keyboard navigation */
+.checkout-page .delivery-option-input:focus-visible {
+  outline: 2px solid rgb(25, 135, 84);
+  outline-offset: 3px;
 }
 
 .checkout-page .delivery-option-date {
