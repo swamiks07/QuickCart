@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { CheckoutHeader } from "./CheckoutHeader";
 import "./CheckoutPage.css";
 import { OrderSummary } from "./OrderSummary";
-import { PaymentSummary } from "./Paymentsummary";
+import { PaymentSummary } from "./PaymentSummary";
 import CartIcon from "../../assets/images/cart-favicon.png";
 
 
